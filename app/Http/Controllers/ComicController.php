@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comic;
 use Illuminate\Http\Request;
 
 class ComicController extends Controller
@@ -13,7 +14,11 @@ class ComicController extends Controller
      */
     public function index()
     {
-        return view('comics.home');
+        // richiamo il model Comic che mi passa il db
+        $comics = Comic::all();
+
+        // gli passo la variabile,che contiene il db, alla vista
+        return view('comics.home', compact('comics'));
     }
 
     /**
