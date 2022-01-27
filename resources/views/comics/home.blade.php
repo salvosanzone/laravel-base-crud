@@ -2,37 +2,37 @@
 
 @section('content')
 
-  <div class="container">
+  <div class="container p-4">
     <h1>Lista Fumetti</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Type</th>
+          <th scope="col">Price</th>
+          <th colspan='3' scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+        @foreach ($comics as $comic)
+          <tr>
+          <th scope="row">{{ $comic->id }}</th>
+          <td>{{ $comic->slug }}</td>
+          <td>{{ $comic->type }}</td>
+          <td>{{ $comic->price }}</td>
+          <td><a href="{{ route('comics.show', $comic) }}" class="btn btn-success">SHOW</a></td>
+          <td><a href="" class="btn btn-primary">EDIT</a></td>
+          <td><a href="" class="btn btn-danger">DELETE</a></td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        @endforeach
+        
+        
       </tbody>
     </table>
+  </div>
+  <div class="container">
+    {{ $comics->links() }}
   </div>
   
 @endsection

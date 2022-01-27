@@ -1,4 +1,4 @@
-<header class="p-1">
+<header class="p-2">
   <ul class="nav nav-pills">
     <li class="nav-item">
       <a class="nav-link {{(Route::currentRouteName() === 'home')? 'active' : ''}}" aria-current="page" href="{{route('home')}}">Home</a>

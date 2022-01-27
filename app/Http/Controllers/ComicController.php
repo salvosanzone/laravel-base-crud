@@ -15,7 +15,7 @@ class ComicController extends Controller
     public function index()
     {
         // richiamo il model Comic che mi passa il db
-        $comics = Comic::all();
+        $comics = Comic::paginate(5);
 
         // gli passo la variabile,che contiene il db, alla vista
         return view('comics.home', compact('comics'));
@@ -50,7 +50,9 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-        //
+        $comic = Comic::find($id);
+
+        return view('comics.show', compact('comic'));
     }
 
     /**
