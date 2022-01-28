@@ -22,7 +22,7 @@
           <td>{{ $comic->type }}</td>
           <td>{{ $comic->price }}</td>
           <td><a href="{{ route('comics.show', $comic) }}" class="btn btn-success">SHOW</a></td>
-          <td><a href="" class="btn btn-primary">EDIT</a></td>
+          <td><a href="{{ route('comics.edit', $comic) }}" class="btn btn-primary">EDIT</a></td>
           <td><a href="" class="btn btn-danger">DELETE</a></td>
         </tr>
         @endforeach

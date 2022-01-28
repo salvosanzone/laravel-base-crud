@@ -7,6 +7,9 @@
       <a class="nav-link {{(Route::currentRouteName() === 'comics.index')? 'active' : ''}}" href="{{route('comics.index')}}">Fumetti</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link {{(Route::currentRouteName() === 'comics.create')? 'active' : ''}}" href="{{route('comics.create')}}">Inserisci Fumetti</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link {{(Route::currentRouteName() === 'contacts')? 'active' : ''}}" href="{{route('contacts')}}">Contatti</a>
     </li>
 </header>

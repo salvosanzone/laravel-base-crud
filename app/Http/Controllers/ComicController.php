@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class ComicController extends Controller
 {
@@ -18,7 +20,7 @@ class ComicController extends Controller
         $comics = Comic::paginate(5);
 
         // gli passo la variabile,che contiene il db, alla vista
-        return view('comics.home', compact('comics'));
+        return view('comics.index', compact('comics'));
     }
 
     /**
@@ -28,7 +30,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics.create');
     }
 
     /**
@@ -39,7 +41,24 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        // salvo dentro $data tutti campi del form inviati nella request
+        $data = $request->all();
+        // inizializzo 
+        $new_comic = new Comic();
+        $new_comic->description = $data['description'];
+        $new_comic->image = $data['image']; 
+        $new_comic->price = $data['price']; 
+        $new_comic->series = $data['series']; 
+        $new_comic->sale_date = $data['sale_date']; 
+        $new_comic->type = $data['type']; 
+        $new_comic->slug = Str::slug($data['title'], '-');
+        
+
+        // salvo tutto nel DB
+        $new_comic->save();
+
+        return redirect()->route('comics.index');
     }
 
     /**
@@ -63,7 +82,8 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comic = Comic::find($id);
+        return view('comics.edit', compact('comic'));
     }
 
     /**
