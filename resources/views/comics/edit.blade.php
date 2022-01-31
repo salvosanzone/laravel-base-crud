@@ -6,8 +6,9 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h2>Modifica di: {{ $comic->slug  }}</h2>
-        <form action="{{ route('comics.store') }}" method="post">
+        <form action="{{ route('comics.update', $comic) }}" method="post">
           @csrf
+          @method('PUT')
           <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
             <input type="text" value="{{ $comic->slug }}" class="form-control" name="title"  id="title" placeholder="Titolo Fumetto">

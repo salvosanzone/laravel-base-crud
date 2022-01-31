@@ -5,10 +5,11 @@
     <h1>{{ $comic->slug }}</h1>
     <div class="row">
       <div class="col-2 ">
-        <img src="{{ $comic->image }}" alt="">
+        <img class="img-fluid" src="{{ $comic->image }}" alt="">
       </div>
       <div class="col-4 offset-2">
         <p>{{ $comic->description }}</p> 
+        <h6> {{ $comic->sale_date }} </h6>
         <td><a href="{{ route('comics.edit', $comic) }}" class="btn btn-primary">EDIT</a></td>
       </div>
   </div>
