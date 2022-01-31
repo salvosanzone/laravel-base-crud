@@ -17,7 +17,7 @@ class ComicController extends Controller
     public function index()
     {
         // richiamo il model Comic che mi passa il db
-        $comics = Comic::paginate(5);
+        $comics = Comic::orderBy('id', 'desc')->paginate(5);
 
         // gli passo la variabile,che contiene il db, alla vista
         return view('comics.index', compact('comics'));
