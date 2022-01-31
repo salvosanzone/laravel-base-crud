@@ -2,7 +2,14 @@
 
 @section('content')
 
-  <div class="container p-4">
+
+
+<div class="container p-4">
+    @if (session('deleted'))
+      <div class="alert alert-danger" role="alert">
+        {{ session('deleted') }}
+      </div>
+    @endif
     <h1>Lista Fumetti</h1>
     <table class="table">
       <thead>

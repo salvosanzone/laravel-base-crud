@@ -41,7 +41,29 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // se non supero la validazione non va avanti
+        $request->validate(
+            [
+                'title' => 'required|max:50|min:2',
+                'image' => 'required',
+                'price' => 'required|numeric|min:1',
+                'series' => 'required|max:50',
+                'sale_date' => 'required',
+                'type' => 'required|max:20'
+            ],
+            [
+                'title.required' => 'Il titolo è un campo obbligatorio',
+                'title.max' => 'Il numero massimo di caretteri consentiti è di :max caratteri',
+                'title.min' => 'Il numero minimo di caratteri richiesti è di :min caratteri',
+                'image.required' => "L'URL dell'immagine è un campo obbligatorio",
+                'price.required' => 'Il prezzo è un campo obbligatorio',
+                'series.required' => 'Il nome della serie è un campo obbligatorio',
+                'series.max' => 'Il numero massimo di caretteri consentiti è di :max caratteri',
+                'sale_date.required' => 'La data di vendita è un campo obbligatorio',
+                'type.required' => 'Il tipo di fumetto è un campo obbligatorio',
+                'type.min' => 'Il numero minimo di caratteri richiesti è di :min caratteri'
+            ]
+        );        
         // salvo dentro $data tutti campi del form inviati nella request
         $data = $request->all();
         // inizializzo 
@@ -126,6 +148,6 @@ class ComicController extends Controller
     {
         $comic->delete();
 
-        return redirect()->route('comics.index'); 
+        return redirect()->route('comics.index')->with('deleted',"Il fumetto $comic->slug è stato eliminato"); 
     }
 }
