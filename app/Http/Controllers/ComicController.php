@@ -97,8 +97,20 @@ class ComicController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
+
         
-        $comic->update($data);
+        
+        // se utilizzo la sintassi $comic->update($data) ho bisogno di fillable
+
+        $comic->description = $data['description'];
+        $comic->image = $data['image']; 
+        $comic->price = $data['price']; 
+        $comic->series = $data['series']; 
+        $comic->sale_date = $data['sale_date']; 
+        $comic->type = $data['type']; 
+        $comic->slug = Str::slug($data['title'], '-');
+
+        $comic->save();
 
         return redirect()->route('comics.show', $comic);
 
@@ -110,8 +122,10 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        return redirect()->route('comics.index'); 
     }
 }
