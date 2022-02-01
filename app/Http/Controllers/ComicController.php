@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comic;
+use App\Http\Requests\ComicRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -39,31 +40,8 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ComicRequest $request)
     {
-        // se non supero la validazione non va avanti
-        $request->validate(
-            [
-                'title' => 'required|max:50|min:2',
-                'image' => 'required',
-                'price' => 'required|numeric|min:1',
-                'series' => 'required|max:50',
-                'sale_date' => 'required',
-                'type' => 'required|max:20'
-            ],
-            [
-                'title.required' => 'Il titolo è un campo obbligatorio',
-                'title.max' => 'Il numero massimo di caretteri consentiti è di :max caratteri',
-                'title.min' => 'Il numero minimo di caratteri richiesti è di :min caratteri',
-                'image.required' => "L'URL dell'immagine è un campo obbligatorio",
-                'price.required' => 'Il prezzo è un campo obbligatorio',
-                'series.required' => 'Il nome della serie è un campo obbligatorio',
-                'series.max' => 'Il numero massimo di caretteri consentiti è di :max caratteri',
-                'sale_date.required' => 'La data di vendita è un campo obbligatorio',
-                'type.required' => 'Il tipo di fumetto è un campo obbligatorio',
-                'type.min' => 'Il numero minimo di caratteri richiesti è di :min caratteri'
-            ]
-        );        
         // salvo dentro $data tutti campi del form inviati nella request
         $data = $request->all();
         // inizializzo 
@@ -115,12 +93,10 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comic $comic)
+    public function update(ComicRequest $request, Comic $comic)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
-
-        
         
         // se utilizzo la sintassi $comic->update($data) ho bisogno di fillable
 
@@ -150,4 +126,6 @@ class ComicController extends Controller
 
         return redirect()->route('comics.index')->with('deleted',"Il fumetto $comic->slug è stato eliminato"); 
     }
+
+    
 }

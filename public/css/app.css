@@ -13045,3 +13045,10 @@ h3 {
   overflow: visible;
   clip: auto;
 }
+
+.form_errors {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #e3342f;
+}
